@@ -46,9 +46,7 @@ const App = () => {
       <div className="flex flex-col gap-6 items-center">
         {weather.main && (
           <div className="flex flex-col w-fit p-6 bg-[#92afd9c2] rounded-2xl text-black/75 items-center justify-center shadow-lg">
-            <p className="text-4xl font-medium text-center">
-              {weather.name}
-            </p>
+            <p className="text-4xl font-medium text-center">{weather.name}</p>
             <div className="text-center my-2 w-fit">
               <img
                 className="w-fit h-fit"
@@ -76,7 +74,7 @@ const App = () => {
                 hour12: true,
               })}
             </p>
-            <p className="v font-medium lowercase">
+            <p className="text-lg lowercase">
               Sunset:{" "}
               {new Date(weather.sys.sunset * 1000).toLocaleTimeString([], {
                 hour: "2-digit",
@@ -84,12 +82,16 @@ const App = () => {
                 hour12: true,
               })}
             </p>
-            <p className="text-lg font-medium">
-              Wind gust: {weather.wind.gust}m/s
-            </p>
+            {weather.wind && weather.wind.gust && (
+              <p className="text-lg font-medium">
+                Wind gust: {weather.wind.gust}m/s
+              </p>
+            )}
+            {weather.wind && weather.wind.speed && (
             <p className="text-lg font-medium">
               Wind speed: {weather.wind.speed}m/s
             </p>
+             )}
           </div>
         )}
 
@@ -98,7 +100,11 @@ const App = () => {
             {Object.values(
               fiveDaysWeather.list.reduce((acc, day) => {
                 const date = new Date(day.dt * 1000).toLocaleDateString();
-                acc[date] = acc[date] || { date, ...day.main, weather: day.weather[0] };
+                acc[date] = acc[date] || {
+                  date,
+                  ...day.main,
+                  weather: day.weather[0],
+                };
                 return acc;
               }, {})
             ).map((day, index) => (
@@ -117,9 +123,9 @@ const App = () => {
                     {convertKelvinToCelsius(day.temp).toFixed(2)}°C
                   </p>
                 </div>
-                {/* <p className="text-center text-smfont-medium">
+                <p className="text-center text-smfont-medium">
                   {day.weather.description}
-                </p> */}
+                </p>
                 <p className="text-center text-sm font-medium">
                   Humidity: {day.humidity}
                 </p>
