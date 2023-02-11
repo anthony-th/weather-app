@@ -31,12 +31,12 @@ const App = () => {
       setFiveDaysWeather(result5Days.data);
       setWeather(result.data);
     } catch (err) {
-      setError("City not found!");
+      setError("City not found! Please correct!");
     }
   };
 
   return (
-    <div className="min-w-[320px] bg-winter bg-cover flex flex-col min-h-screen items-center justify-between">
+    <div className="min-w-[320px] bg-winter bg-cover flex flex-col min-h-screen items-center justify-between gap-8">
       <Header
         handleSubmit={handleSubmit}
         city={city}
@@ -45,55 +45,86 @@ const App = () => {
       />
       <div className="flex flex-col gap-6 items-center">
         {weather.main && (
-          <div className="flex flex-col w-fit p-4 bg-zinc-800/75 rounded text-white">
-            <p className="text-md font-medium">
-              T: {weather.main.temp}K / T:{" "}
-              {convertKelvinToCelsius(weather.main.temp).toFixed(2)}°C
+          <div className="flex flex-col w-fit p-8 bg-[#3772a6] rounded-2xl text-white items-center justify-center">
+            <p className="text-4xl font-medium text-center">
+              {weather.name}
             </p>
-            <p className="text-md font-medium">
+            <div className="text-center my-2 w-fit">
+              <img
+                className="w-fit h-fit"
+                src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+                alt={weather.weather[0].description}
+              />
+              <p className="text-3xl font-medium">
+                {convertKelvinToCelsius(weather.main.temp).toFixed(2)}°C
+              </p>
+            </div>
+            <p className="text-xl font-medium">
               Humidity: {weather.main.humidity}%
             </p>
-            <p className="text-md font-medium">
+            <p className="text-xl font-medium">
+              Pressure: {weather.main.pressure}hPa
+            </p>
+            <p className="text-xl font-medium">
               Description: {weather.weather[0].description}
             </p>
-            <p className="text-md font-medium">
+            <p className="text-xl lowercase">
               Sunrise:{" "}
-              {new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}
+              {new Date(weather.sys.sunrise * 1000).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+              })}
             </p>
-            <p className="text-md font-medium">
-              Sunset: {new Date(weather.sys.sunset * 1000).toLocaleTimeString()}
+            <p className="text-xl font-medium lowercase">
+              Sunset:{" "}
+              {new Date(weather.sys.sunset * 1000).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+              })}
             </p>
-            <p className="text-md font-medium">
-              Wind gust: {weather.wind.gust}
+            <p className="text-xl font-medium">
+              Wind gust: {weather.wind.gust}m/s
             </p>
-            <p className="text-lg font-medium">
-              Wind speed: {weather.wind.speed}
+            <p className="text-xl font-medium">
+              Wind speed: {weather.wind.speed}m/s
             </p>
           </div>
         )}
 
         {fiveDaysWeather.list && (
-          <div className="flex flex-wrap justify-center text-white gap-1 max-w-[320px] sm:max-w-full">
+          <div className="flex flex-wrap justify-center text-white gap-2 max-w-[320px] sm:max-w-full">
             {Object.values(
               fiveDaysWeather.list.reduce((acc, day) => {
                 const date = new Date(day.dt * 1000).toLocaleDateString();
-                acc[date] = acc[date] || { date, ...day.main };
+                acc[date] = acc[date] || { date, ...day.main, weather: day.weather[0] };
                 return acc;
               }, {})
             ).map((day, index) => (
               <div
                 key={index}
-                className="flex flex-col p-2 bg-zinc-800/75 rounded"
+                className="flex flex-col py-4 px-3 bg-[#3772a6] rounded-lg text-white items-center"
               >
-                <p className="text-center text-xs font-medium ">{day.date}</p>
-                <p className="text-center text-xs font-medium">
-                  T: {day.temp}K
+                <p className="text-center text-md font-medium">{day.date}</p>
+                <div className="text-center">
+                  <img
+                    className=""
+                    src={`http://openweathermap.org/img/wn/${day.weather.icon}@2x.png`}
+                    alt={day.weather.description}
+                  />
+                  <p className="text-center text-xl font-medium">
+                    {convertKelvinToCelsius(day.temp).toFixed(2)}°C
+                  </p>
+                </div>
+                <p className="text-center text-md font-medium">
+                  {day.weather.description}
                 </p>
-                <p className="text-center text-xs font-medium">
-                  T: {convertKelvinToCelsius(day.temp).toFixed(2)}°C
-                </p>
-                <p className="text-center text-xs font-medium">
+                <p className="text-center text-md font-medium">
                   Humidity: {day.humidity}
+                </p>
+                <p className="text-center text-md font-medium">
+                  Pressure: {day.pressure}hPa
                 </p>
               </div>
             ))}
