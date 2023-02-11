@@ -36,65 +36,70 @@ const App = () => {
   };
 
   return (
-    <div className="bg-zinc-800 flex flex-col min-h-screen items-center justify-between">
+    <div className="min-w-[320px] bg-winter bg-cover flex flex-col min-h-screen items-center justify-between">
       <Header
         handleSubmit={handleSubmit}
         city={city}
         setCity={setCity}
         error={error}
       />
-      {weather.main && (
-        <div className="flex flex-col p-4">
-          <p className="mt-2 text-lg font-medium">
-            T(Kelvin): {weather.main.temp}
-          </p>
-          <p className="mt-2 text-lg font-medium">
-            T(Celsius):{" "}
-            {convertKelvinToCelsius(weather.main.temp).toFixed(2)}°C
-          </p>
-          <p className="mt-2 text-lg font-medium">
-            Humidity: {weather.main.humidity}
-          </p>
-          <p className="mt-2 text-lg font-medium">
-            Description: {weather.weather[0].description}
-          </p>
-          <p className="mt-2 text-lg font-medium">
-            Sunrise: {new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}
-          </p>
-          <p className="mt-2 text-lg font-medium">
-            Sunset: {new Date(weather.sys.sunset * 1000).toLocaleTimeString()}
-          </p>
-          <p className="mt-2 text-lg font-medium">
-            Wind gust: {weather.wind.gust}
-          </p>
-          <p className="mt-2 text-lg font-medium">
-            Wind speed: {weather.wind.speed}
-          </p>
-        </div>
-      )}
+      <div className="flex flex-col gap-6 items-center">
+        {weather.main && (
+          <div className="flex flex-col w-fit p-4 bg-zinc-800/75 rounded text-white">
+            <p className="text-md font-medium">
+              T: {weather.main.temp}K / T:{" "}
+              {convertKelvinToCelsius(weather.main.temp).toFixed(2)}°C
+            </p>
+            <p className="text-md font-medium">
+              Humidity: {weather.main.humidity}%
+            </p>
+            <p className="text-md font-medium">
+              Description: {weather.weather[0].description}
+            </p>
+            <p className="text-md font-medium">
+              Sunrise:{" "}
+              {new Date(weather.sys.sunrise * 1000).toLocaleTimeString()}
+            </p>
+            <p className="text-md font-medium">
+              Sunset: {new Date(weather.sys.sunset * 1000).toLocaleTimeString()}
+            </p>
+            <p className="text-md font-medium">
+              Wind gust: {weather.wind.gust}
+            </p>
+            <p className="text-lg font-medium">
+              Wind speed: {weather.wind.speed}
+            </p>
+          </div>
+        )}
 
-      {fiveDaysWeather.list && (
-        <div className="flex p-4">
-          {Object.values(
-            fiveDaysWeather.list.reduce((acc, day) => {
-              const date = new Date(day.dt * 1000).toLocaleDateString();
-              acc[date] = acc[date] || { date, ...day.main };
-              return acc;
-            }, {})
-          ).map((day, index) => (
-            <div key={index} className="flex flex-col">
-              <p className="mt-2 text-lg font-medium">{day.date}</p>
-              <p className="mt-2 text-lg font-medium">T (Kelvin): {day.temp}</p>
-              <p className="mt-2 text-lg font-medium">
-                T(Celsius): {convertKelvinToCelsius(day.temp).toFixed(2)}°C
-              </p>
-              <p className="mt-2 text-lg font-medium">
-                Humidity: {day.humidity}
-              </p>
-            </div>
-          ))}
-        </div>
-      )}
+        {fiveDaysWeather.list && (
+          <div className="flex flex-wrap justify-center text-white gap-1 max-w-[320px] sm:max-w-full">
+            {Object.values(
+              fiveDaysWeather.list.reduce((acc, day) => {
+                const date = new Date(day.dt * 1000).toLocaleDateString();
+                acc[date] = acc[date] || { date, ...day.main };
+                return acc;
+              }, {})
+            ).map((day, index) => (
+              <div
+                key={index}
+                className="flex flex-col p-2 bg-zinc-800/75 rounded"
+              >
+                <p className="text-center text-xs font-medium ">{day.date}</p>
+                <p className="text-center text-xs font-medium">
+                  T: {day.temp}K
+                </p>
+                <p className="text-center text-xs font-medium">
+                  T: {convertKelvinToCelsius(day.temp).toFixed(2)}°C
+                </p>
+                <p className="text-center text-xs font-medium">
+                  Humidity: {day.humidity}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
       <Footer />
     </div>
   );
