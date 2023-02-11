@@ -23,10 +23,10 @@ const App = () => {
 
     try {
       const result = await axios(
-        `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=91d2dd3e0546bacc1b50edc59b6c0069`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=91d2dd3e0546bacc1b50edc59b6c0069`
       );
       const result5Days = await axios(
-        `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=91d2dd3e0546bacc1b50edc59b6c0069`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=91d2dd3e0546bacc1b50edc59b6c0069`
       );
       setFiveDaysWeather(result5Days.data);
       setWeather(result.data);
@@ -52,7 +52,7 @@ const App = () => {
             <div className="text-center my-2 w-fit">
               <img
                 className="w-fit h-fit"
-                src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+                src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
                 alt={weather.weather[0].description}
               />
               <p className="text-3xl font-medium">
@@ -110,7 +110,7 @@ const App = () => {
                 <div className="text-center">
                   <img
                     className=""
-                    src={`http://openweathermap.org/img/wn/${day.weather.icon}@2x.png`}
+                    src={`https://openweathermap.org/img/wn/${day.weather.icon}@2x.png`}
                     alt={day.weather.description}
                   />
                   <p className="text-center text-xl font-medium">
