@@ -5,16 +5,13 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import sunrise from "./assets/img/sunrise.png";
 import sunset from "./assets/img/sunset.png";
-import { API_KEY, API_URL, IMG_URL } from "./shared/utils";
+import { API_KEY, API_URL, IMG_URL, convertKelvinToCelsius } from "./shared/utils";
 
 const App = () => {
   const [weather, setWeather] = useState({});
   const [city, setCity] = useState("");
   const [error, setError] = useState(false);
   const [fiveDaysWeather, setFiveDaysWeather] = useState({});
-  const convertKelvinToCelsius = (kelvin) => {
-    return kelvin - 273.15;
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
