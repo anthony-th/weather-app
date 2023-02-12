@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import sunrise from "./assets/img/sunrise.png";
 import sunset from "./assets/img/sunset.png";
-import { API_KEY, API_URL, IMG_URL, convertKelvinToCelsius } from "./shared/utils";
+import { API_KEY, API_URL, IMG_URL } from "./shared/utils";
 
 const App = () => {
   const [weather, setWeather] = useState({});
@@ -23,10 +23,10 @@ const App = () => {
 
     try {
       const result = await axios(
-        `${API_URL}/weather?q=${city}&appid=${API_KEY}`
+        `${API_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`
       );
       const result5Days = await axios(
-        `${API_URL}/forecast?q=${city}&appid=${API_KEY}`
+        `${API_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`
       );
       setFiveDaysWeather(result5Days.data);
       setWeather(result.data);
@@ -53,13 +53,10 @@ const App = () => {
                 src={`${IMG_URL}/${weather.weather[0].icon}@2x.png`}
                 alt={weather.weather[0].description}
               />
-              <p className="text-3xl font-medium">
-                {convertKelvinToCelsius(weather.main.temp).toFixed(2)}°C
-              </p>
+              <p className="text-3xl font-medium">{weather.main.temp}°C</p>
             </div>
             <p className="text-lg font-medium">
-              Feels like:{" "}
-              {convertKelvinToCelsius(weather.main.feels_like).toFixed(2)}°C
+              Feels like: {weather.main.feels_like}°C
             </p>
             <p className="text-lg font-medium">
               {weather.weather[0].description}
@@ -140,12 +137,11 @@ const App = () => {
                     alt={day.weather.description}
                   />
                   <p className="text-center text-xl font-medium">
-                    {convertKelvinToCelsius(day.temp).toFixed(2)}°C
+                    {day.temp}°C
                   </p>
                 </div>
                 <p className="text-sm font-medium">
-                  Feels like:{" "}
-                  {convertKelvinToCelsius(day.feels_like).toFixed(2)}°C
+                  Feels like: {day.feels_like}°C
                 </p>
                 <p className="text-center text-smfont-medium">
                   {day.weather.description}
