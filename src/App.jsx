@@ -3,6 +3,8 @@ import axios from "axios";
 import "./index.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import sunrise from "./assets/img/sunrise.png";
+import sunset from "./assets/img/sunset.png";
 
 const App = () => {
   const [weather, setWeather] = useState({});
@@ -45,9 +47,9 @@ const App = () => {
       />
       <div className="flex flex-col gap-6 items-center">
         {weather.main && (
-          <div className="flex flex-col w-fit p-6 bg-[#92afd9c2] rounded-2xl text-black/75 items-center justify-center shadow-lg">
+          <div className="flex flex-col w-fit p-6 pt-4 bg-[#92afd9c2] rounded-2xl text-black/75 items-center justify-center shadow-lg">
             <p className="text-4xl font-medium text-center">{weather.name}</p>
-            <div className="text-center my-2 w-fit">
+            <div className="text-center w-fit relative">
               <img
                 className="w-fit h-fit"
                 src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
@@ -58,29 +60,17 @@ const App = () => {
               </p>
             </div>
             <p className="text-lg font-medium">
+              Feels like:{" "}
+              {convertKelvinToCelsius(weather.main.feels_like).toFixed(2)}°C
+            </p>
+            <p className="text-lg font-medium">
+              {weather.weather[0].description}
+            </p>
+            <p className="text-lg font-medium">
               Humidity: {weather.main.humidity}%
             </p>
             <p className="text-lg font-medium">
               Pressure: {weather.main.pressure}hPa
-            </p>
-            <p className="text-lg font-medium">
-              Description: {weather.weather[0].description}
-            </p>
-            <p className="text-lg lowercase">
-              Sunrise:{" "}
-              {new Date(weather.sys.sunrise * 1000).toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: true,
-              })}
-            </p>
-            <p className="text-lg lowercase">
-              Sunset:{" "}
-              {new Date(weather.sys.sunset * 1000).toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: true,
-              })}
             </p>
             {weather.wind && weather.wind.gust && (
               <p className="text-lg font-medium">
@@ -88,10 +78,42 @@ const App = () => {
               </p>
             )}
             {weather.wind && weather.wind.speed && (
-            <p className="text-lg font-medium">
-              Wind speed: {weather.wind.speed}m/s
-            </p>
-             )}
+              <p className="text-lg font-medium">
+                Wind speed: {weather.wind.speed}m/s
+              </p>
+            )}
+            <div className="flex gap-2">
+              <div className="lowercase flex items-center gap-1">
+                <img
+                  className="w-[15px] h-[15px]"
+                  src={sunrise}
+                  alt="Sunrise"
+                />
+                <p className="text-base">
+                  {new Date(weather.sys.sunrise * 1000)
+                    .toLocaleTimeString("en-US", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: true,
+                    })
+                    .replace(" AM", "AM")
+                    .replace(" PM", "PM")}
+                </p>
+              </div>
+              <div className="lowercase flex items-center gap-1">
+                <img className="w-[15px] h-[15px]" src={sunset} alt="Sunset" />
+                <p className="text-base">
+                  {new Date(weather.sys.sunset * 1000)
+                    .toLocaleTimeString("en-US", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: true,
+                    })
+                    .replace(" AM", "AM")
+                    .replace(" PM", "PM")}
+                </p>
+              </div>
+            </div>
           </div>
         )}
 
@@ -115,7 +137,7 @@ const App = () => {
                 <p className="text-center text-xl font-medium">{day.date}</p>
                 <div className="text-center">
                   <img
-                    className=""
+                    className="w-[70px] h-[70px]"
                     src={`https://openweathermap.org/img/wn/${day.weather.icon}@2x.png`}
                     alt={day.weather.description}
                   />
@@ -123,6 +145,10 @@ const App = () => {
                     {convertKelvinToCelsius(day.temp).toFixed(2)}°C
                   </p>
                 </div>
+                <p className="text-sm font-medium">
+                  Feels like:{" "}
+                  {convertKelvinToCelsius(day.feels_like).toFixed(2)}°C
+                </p>
                 <p className="text-center text-smfont-medium">
                   {day.weather.description}
                 </p>
