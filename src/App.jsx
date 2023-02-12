@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import sunrise from "./assets/img/sunrise.png";
 import sunset from "./assets/img/sunset.png";
+import { API_KEY, API_URL, IMG_URL } from "./shared/utils";
 
 const App = () => {
   const [weather, setWeather] = useState({});
@@ -25,10 +26,10 @@ const App = () => {
 
     try {
       const result = await axios(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=91d2dd3e0546bacc1b50edc59b6c0069`
+        `${API_URL}/weather?q=${city}&appid=${API_KEY}`
       );
       const result5Days = await axios(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=91d2dd3e0546bacc1b50edc59b6c0069`
+        `${API_URL}/forecast?q=${city}&appid=${API_KEY}`
       );
       setFiveDaysWeather(result5Days.data);
       setWeather(result.data);
@@ -52,7 +53,7 @@ const App = () => {
             <div className="text-center w-fit relative">
               <img
                 className="w-fit h-fit"
-                src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+                src={`${IMG_URL}/${weather.weather[0].icon}@2x.png`}
                 alt={weather.weather[0].description}
               />
               <p className="text-3xl font-medium">
@@ -138,7 +139,7 @@ const App = () => {
                 <div className="text-center">
                   <img
                     className="w-[70px] h-[70px]"
-                    src={`https://openweathermap.org/img/wn/${day.weather.icon}@2x.png`}
+                    src={`${IMG_URL}/${day.weather.icon}@2x.png`}
                     alt={day.weather.description}
                   />
                   <p className="text-center text-xl font-medium">
