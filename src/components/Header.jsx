@@ -19,7 +19,7 @@ const Header = ({ city, setCity, error, handleSubmit }) => {
         </button>
       </form>
       {error && (
-        <p className="text-xl -bottom-[33px] sm:-bottom-2 absolute font-medium text-red-400 text-center upp">{error}</p>
+        <p className="text-xl -bottom-[33px] sm:-bottom-3 absolute font-medium text-white text-center upp px-3 py-1 bg-slate-600/75 rounded-xl border border-red-600/50">{error}</p>
       )}
     </div>
   );
