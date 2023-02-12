@@ -17,10 +17,10 @@ const Weather = (props) => {
                 src={`${IMG_URL}/${weather.weather[0].icon}@2x.png`}
                 alt={weather.weather[0].description}
               />
-              <p className="text-3xl font-medium">{weather.main.temp}°C</p>
+              <p className="text-3xl font-medium">{Math.trunc(weather.main.temp)}°C</p>
             </div>
             <p className="text-lg font-medium">
-              Feels like: {weather.main.feels_like}°C
+              Feels like: {Math.trunc(weather.main.feels_like)}°C
             </p>
             <p className="text-lg font-medium">
               {weather.weather[0].description}

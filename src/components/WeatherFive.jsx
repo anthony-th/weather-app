@@ -31,11 +31,11 @@ const WeatherFive = (props) => {
                     alt={day.weather.description}
                   />
                   <p className="text-center text-xl font-medium">
-                    {day.temp}°C
+                    {Math.trunc(day.temp)}°C
                   </p>
                 </div>
                 <p className="text-sm font-medium">
-                  Feels like: {day.feels_like}°C
+                  Feels like: {Math.trunc(day.feels_like)}°C
                 </p>
                 <p className="text-center text-smfont-medium">
                   {day.weather.description}
