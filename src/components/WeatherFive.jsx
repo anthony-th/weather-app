@@ -1,51 +1,57 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
+import { IMG_URL } from "../shared/utils";
 
-const WeatherFive = ({ city }) => {
-  const [weatherForecast, setWeatherForecast] = useState([]);
-  const convertKelvinToCelsius = (kelvin) => {
-    return kelvin - 273.15;
-  };
-
-  const fetchWeatherForecast = async () => {
-    const result = await axios(
-      `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=91d2dd3e0546bacc1b50edc59b6c0069`
-    );
-    setWeatherForecast(result.data.list);
-  };
+const WeatherFive = (props) => {
+  const { fiveDaysWeather } = props;
 
   return (
-    <div>
-      {weatherForecast.reduce((result, forecast, index, array) => {
-        if (
-          index === 0 ||
-          new Date(array[index - 1].dt * 1000).toDateString() !==
-            new Date(forecast.dt * 1000).toDateString()
-        ) {
-          result.push(
-            <div key={forecast.dt} className="flex">
-              <p className="mr-2">
-                Date: {new Date(forecast.dt * 1000).toDateString()}
-              </p>
-              <p className="mr-2">Temperature (Kelvin): {forecast.main.temp}</p>
-              <p className="mr-2">
-                Temperature (Celsius):{" "}
-                {convertKelvinToCelsius(forecast.main.temp).toFixed(2)}°C
-              </p>
-              <p className="mr-2">Humidity: {forecast.main.humidity}</p>
-              <p className="mr-2">
-                Description: {forecast.weather[0].description}
-              </p>
-              <p className="mr-2">Wind speed: {forecast.wind.speed}</p>
-              <p className="mr-2">Wind gust: {forecast.wind.gust}</p>
-            </div>
-          );
-        }
-        return result;
-      }, [])}
-    </div>
+    <>
+     {fiveDaysWeather.list && (
+          <div className="flex flex-wrap justify-center text-gray-600 gap-2 max-w-[320px] sm:max-w-full">
+            {Object.values(
+              fiveDaysWeather.list.reduce((acc, day) => {
+                const date = new Date(day.dt * 1000).toLocaleDateString();
+                acc[date] = acc[date] || {
+                  date,
+                  ...day.main,
+                  weather: day.weather[0],
+                };
+                return acc;
+              }, {})
+            ).map((day, index) => (
+              <div
+                key={index}
+                className="shadow-lg flex flex-col py-4 px-3 bg-[#92afd9c2] rounded-lg text-black/75 items-center"
+              >
+                <p className="text-center text-xl font-medium">{day.date}</p>
+                <div className="text-center">
+                  <img
+                    className="w-[70px] h-[70px]"
+                    src={`${IMG_URL}/${day.weather.icon}@2x.png`}
+                    alt={day.weather.description}
+                  />
+                  <p className="text-center text-xl font-medium">
+                    {Math.trunc(day.temp)}°C
+                  </p>
+                </div>
+                <p className="text-sm font-medium">
+                  Feels like: {Math.trunc(day.feels_like)}°C
+                </p>
+                <p className="text-center text-smfont-medium">
+                  {day.weather.description}
+                </p>
+                <p className="text-center text-sm font-medium">
+                  Humidity: {day.humidity}
+                </p>
+                <p className="text-center text-sm font-medium">
+                  Pressure: {day.pressure}hPa
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+    </>
   );
 };
 
 export default WeatherFive;
-
