@@ -52,7 +52,7 @@ const Weather = (props) => {
           <div className="flex gap-2">
             <div className="lowercase flex items-center gap-1">
               <img className="w-[15px] h-[15px]" src={sunrise} alt="Sunrise" />
-              <p className="text-base">
+              <p className="text-base font-medium">
                 {new Date(weather.sys.sunrise * 1000)
                   .toLocaleTimeString("en-US", {
                     hour: "2-digit",
@@ -65,7 +65,7 @@ const Weather = (props) => {
             </div>
             <div className="lowercase flex items-center gap-1">
               <img className="w-[15px] h-[15px]" src={sunset} alt="Sunset" />
-              <p className="text-base">
+              <p className="text-base font-medium">
                 {new Date(weather.sys.sunset * 1000)
                   .toLocaleTimeString("en-US", {
                     hour: "2-digit",

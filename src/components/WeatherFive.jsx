@@ -46,7 +46,7 @@ const WeatherFive = (props) => {
               <p className="text-sm font-medium">
                 Feels like: {Math.trunc(day.feels_like)}°C
               </p>
-              <p className="text-center text-smfont-medium">
+              <p className="text-center text-sm font-medium">
                 {day.weather.description}
               </p>
               <p className="text-center text-sm font-medium">
