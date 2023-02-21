@@ -1,20 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './index.html',
-    './src/**/*.{jsx, js}'
-  ],
+  content: ["./src/**/*.{jsx, js, html}"],
   theme: {
     extend: {
       fontFamily: {
-        yesteryear: ['Yesteryear', 'regular'],
-        vasek: ['Vasek-Italic', 'regular'],
-        roboto: ['Roboto-regular', 'regular'],
-        raleway: ['Raleway-Regular', 'regular']
+        yesteryear: ["Yesteryear", "regular"],
+        vasek: ["Vasek-Italic", "regular"],
+        roboto: ["Roboto-regular", "regular"],
+        raleway: ["Raleway-Regular", "regular"],
       },
       backgroundImage: {
-        'winter': "url('assets/img/bg.webp')",
-      }
+        winter: "url('assets/img/bg.webp')",
+      },
     },
   },
   plugins: [],

@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Yesteryear";
+  src: url("./assets/fonts/Yesteryear-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vasek-Italic";
+  src: url("./assets/fonts/Vasek-Italic.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto-regular";
+  src: url("./assets/fonts/Roboto-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Raleway-Regular";
+  src: url("./assets/fonts/Raleway-Regular.ttf") format("truetype");
+  font-display: swap;
+}
