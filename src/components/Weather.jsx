@@ -40,7 +40,7 @@ const Weather = (props) => {
           <p className="text-lg font-medium">
             Pressure: {weather.main.pressure}hPa
           </p>
-          {weather.wind && weather.wind.gust && (
+          {weather.wind.gust !== undefined && weather.wind.gust !== 0 && (
             <p className="text-lg font-medium">
               Wind gust: {weather.wind.gust}m/s
             </p>
