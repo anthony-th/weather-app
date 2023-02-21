@@ -13,11 +13,15 @@ const APIRequest = (city, setWeather, setFiveDaysWeather, setError) => {
       const result = await axios(
         `${API_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`
       );
+      const { lat, lon } = result.data.coord;
+      const uvResult = await axios(
+        `${API_URL}/uvi?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+      );
       const result5Days = await axios(
-        `${API_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`
+        `${API_URL}/onecall?lat=${lat}&lon=${lon}&cnt=7&appid=${API_KEY}&units=metric`
       );
       setFiveDaysWeather(result5Days.data);
-      setWeather(result.data);
+      setWeather({ ...result.data, uv: uvResult.data.value });
     } catch (err) {
       setError("City not found! Please correct!");
     }

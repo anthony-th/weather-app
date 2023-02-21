@@ -26,6 +26,7 @@ const Weather = (props) => {
             <p className="text-3xl font-medium">
               {Math.trunc(weather.main.temp)}°C
             </p>
+            <p className="text-lg font-medium">UV Index: {weather.uv}</p>
           </div>
           <p className="text-lg font-medium">
             Feels like: {Math.trunc(weather.main.feels_like)}°C
