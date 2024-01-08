@@ -35,7 +35,6 @@ jobs:
         with:
           source: ./
           destination: ./_site
-          API_KEY: ${{ secrets.API_KEY }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
