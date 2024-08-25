@@ -4,7 +4,7 @@
   box-shadow: 10px -2px 20px 2px rgb( 0 0 0 / 30% );
   color: #fff;
   background-color: #333;
-  margin: 20px auto 0;
+  margin: 20px auto 10px;
   padding: 0 20px 20px;
 }
 
@@ -13,18 +13,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
+}
+
+.top {
+  padding: 0 10px;
+  gap: 0;
 }
 
 .city {
   font-weight: 600;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1;
   letter-spacing: 1px;
+  margin-bottom: 5px;
 }
 
 .weather-description {
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1;
 }
 
@@ -42,10 +49,9 @@
 
 .details {
   width: 100%;
-  padding-left: 15px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 5px;
 }
 
 .parameter-row {
@@ -68,4 +74,14 @@
 
 .parameter-label.top {
   border-bottom: 1px solid #fff;
+  padding: 0;
+}
+
+@media screen and (max-width: 480px) {
+  .weather {
+    padding: 0 15px 15px;
+  }
+  .details {
+    padding-left: 0;
+  }
 }
