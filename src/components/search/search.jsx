@@ -26,6 +26,46 @@ const Search = ({ onSearchChange }) => {
     onSearchChange(searchData);
   };
 
+  const searchStyles = {
+    control: (baseStyles) => ({
+      ...baseStyles,
+      borderColor: 'transparent',
+      boxShadow: '10px 6px 14px 3px rgba(0, 0, 0, 0.3)',
+      backgroundColor: 'transparent',
+      '&:hover': {
+        borderColor: '#EE1F80',
+      },
+      cursor: 'pointer',
+    }),
+    option: (baseStyles, state) => ({
+      ...baseStyles,
+      cursor: 'pointer',
+      backgroundColor: state.isFocused ? '#EE1F80' : 'transparent',
+      paddingLeft: '45px',
+    }),
+    menu: (baseStyles) => ({
+      ...baseStyles,
+      backgroundColor: '#333333',
+      color: '#d1d1d1',
+      boxShadow: '10px 6px 14px 3px rgba(0, 0, 0, 0.3)',
+    }),
+    placeholder: (baseStyles) => ({
+      ...baseStyles,
+      color: '#d1d1d1',
+      paddingLeft: '35px',
+    }),
+    singleValue: (baseStyles) => ({
+      ...baseStyles,
+      color: '#e1e1e1',
+      paddingLeft: '35px',
+    }),
+    input: (baseStyles) => ({
+      ...baseStyles,
+      color: '#e1e1e1',
+      paddingLeft: '35px',
+    }),
+  };
+
   return (
     <AsyncPaginate
       placeholder='Search for city...'
@@ -33,6 +73,7 @@ const Search = ({ onSearchChange }) => {
       value={search}
       onChange={handleOnChange}
       loadOptions={loadOptions}
+      styles={searchStyles}
     />
   );
 };

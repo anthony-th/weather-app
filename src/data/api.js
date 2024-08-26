@@ -1,7 +1,7 @@
 export const geoApiOptions = {
 	method: 'GET',
 	headers: {
-		'x-rapidapi-key': import.meta.env.GEO_API_KEY,
+		'x-rapidapi-key': import.meta.env.VITE_GEO_API_KEY,
 		'x-rapidapi-host': 'wft-geo-db.p.rapidapi.com',
 	},
 };

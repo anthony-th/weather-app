@@ -1,0 +1,18 @@
+.footer {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+  font-size: 14px;
+  opacity: 0.4;
+}
+
+.copyright-link {
+  text-decoration: none;
+  color: #e1e1e1;
+}
+
+.copyright-link:hover {
+  color: #EE1F80;
+}
