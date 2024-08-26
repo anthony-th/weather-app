@@ -9,6 +9,7 @@ import Copyright from './components/copyright/copyright';
 function App() {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setForecastWeather] = useState(null);
+  const [forecastKey, setForecastKey] = useState(0);
 
   const handleOnSearchChange = (searchData) => {
     const [lat, lon] = searchData.value.split(' ');
@@ -23,6 +24,7 @@ function App() {
 
         setCurrentWeather({ city: searchData.label, ...weatherRes });
         setForecastWeather({ city: searchData.label, ...forecastRes });
+        setForecastKey(prevKey => prevKey + 1);
       })
       .catch(console.log);
   }
@@ -32,9 +34,9 @@ function App() {
       <div className='container'>
         <Search onSearchChange={handleOnSearchChange} />
         {currentWeather && <CurrentWeather data={currentWeather} />}
-        {forecast && <Forecast data={forecast} />}
+        {forecast && <Forecast key={forecastKey} data={forecast} />}
       </div>
-        <Copyright />
+      <Copyright />
     </>
   );
 }

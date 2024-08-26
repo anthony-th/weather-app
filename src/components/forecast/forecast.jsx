@@ -1,4 +1,6 @@
+import { motion } from "framer-motion";
 import "./forecast.css";
+import { cardAnimate, cardVariants } from "../../shared/motion-animate";
 
 const WEEK_DAYS = [
   "Monday",
@@ -17,9 +19,14 @@ const Forecast = ({ data }) => {
   );
 
   return (
-    <div className="forecast-container">
+    <motion.div
+      className="forecast-container"
+      variants={cardAnimate}
+      initial="hidden"
+      animate="visible"
+    >
       {data.list.slice(0, 7).map((item, idx) => (
-        <div key={idx} className="card">
+        <motion.div key={idx} className="card" variants={cardVariants}>
           <div className="daily-item">
             <img
               src={`icons/${item.weather[0].icon}.png`}
@@ -56,9 +63,9 @@ const Forecast = ({ data }) => {
               <label>{Math.round(item.main.feels_like)}°C</label>
             </div>
           </div>
-        </div>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 };
 

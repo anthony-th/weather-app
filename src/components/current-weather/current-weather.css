@@ -14,6 +14,7 @@
   display: flex;
   justify-content: space-between;
   padding: 20px 45px;
+  gap: 10px;
 }
 
 .right {
@@ -46,6 +47,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 300px;
+  gap: 10px;
 }
 
 .location {
@@ -83,4 +85,50 @@
 
 .weather-icon {
   width: 130px;
+}
+
+
+@media screen and (max-width: 845px) {
+  .weather {
+    flex-wrap: wrap;
+  }
+  .right {
+    width: 100%;
+  }
+  .left {
+    padding: 20px;
+  }
+  .weather-icon {
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .details-block {
+    gap: 5px;
+  }
+  .details {
+    grid-template-columns: auto;
+  }
+  .left {
+    gap: 30px;
+  }
+  .weather-icon {
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .left {
+    gap: 10px;
+  }
+  .city {
+    font-size: 20px;
+  }
+  .temperature {
+    font-size: 50px;
+  }
+  .temperature-c {
+    font-size: 23px;
+  }
 }
