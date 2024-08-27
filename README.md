@@ -4,10 +4,17 @@
 
 
 ![screenshot](/public/readme/readme.png "project preview")
-<!-- ![screenshot](/public/readme/readme.gif "project preview") -->
+![screenshot](/public/readme/readme.gif "project preview desktop")
+<details><summary>mobile preview</summary>
+
+![screenshot](/public/readme/readme_m.gif "project preview mobile")
+
+</details>
 
 ## Project's Description
 
+A weather application that uses the OpenWeatherMap API and GeoDB API for location autocomplete. The project uses a responsive design and animated icons.
+**Important information!** Be aware of API limitations! Not all known locations in the world are available in the GeoDB API!
 
 ### Quick Start
 
@@ -21,17 +28,38 @@ Make sure you have the following installed on your machine:
    - [Node.js](https://nodejs.org/en)
    - [npm](https://www.npmjs.com/) (Node Package Manager)
 
-1. Clone the Repository:
+
+
+1. Sign Up: [https://rapidapi.com](https://rapidapi.com/) and [https://openweathermap.org](https://openweathermap.org/)
+
+2. Choose your RapidAPI Hub experience: Review the [pricing](https://rapidapi.com/products/pricing) options and obtain an [API key](https://rapidapi.com/wirefreethought/api/geodb-cities/)
+
+3. Get your OpenWeatherMap API key: After registering (via `Email` on the `account page`)
+
+4. Clone the Repository:
 ```bash
 git clone https://github.com/anthony-th/weather-app.git
 cd weather-app
 ```
-2. Install the NPM packages in the project folder:
+
+5. Create `.env` file
+```bash
+touch .env
+```
+6. Fill in the `.env` file with the necessary data:
+
+```javascript
+VITE_WEATHER_API_KEY = <your-openweathermap-key>
+VITE_GEO_API_KEY = <your-rapidapi-key>
+```
+
+7. Install the NPM packages in the project folder:
 ```bash
 npm install
 ```
 
-3. Running the Project
+
+8. Running the Project
 
 ```bash
 npm run dev
