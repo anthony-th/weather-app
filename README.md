@@ -49,7 +49,7 @@ touch .env
 ```
 6. Fill in the `.env` file with the necessary data:
 
-```javascript
+```bash
 VITE_WEATHER_API_KEY = <your-openweathermap-key>
 VITE_GEO_API_KEY = <your-rapidapi-key>
 ```
