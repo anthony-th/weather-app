@@ -14,6 +14,7 @@
 ## Project's Description
 
 A weather application that uses the OpenWeatherMap API and GeoDB API for location autocomplete. The project uses a responsive design and animated icons.
+
 **Important information!** Be aware of API limitations! Not all known locations in the world are available in the GeoDB API!
 
 ### Quick Start
