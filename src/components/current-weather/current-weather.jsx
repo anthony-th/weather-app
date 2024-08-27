@@ -43,6 +43,13 @@ const CurrentWeather = ({ data }) => {
           <p className="temperature">{Math.round(data.main.temp)}</p>
           <p className="temperature-c">°C</p>
         </div>
+        <div className="weather-icon-block">
+          <img
+            alt="weather"
+            className="weather-icon"
+            src={`icons/${data.weather[0].icon}.svg`}
+          />
+        </div>
       </div>
     </div>
   );

@@ -13,10 +13,24 @@ const WEEK_DAYS = [
 ];
 
 const Forecast = ({ data }) => {
+  const currentDate = new Date().toISOString().split("T")[0];
   const dayInAWeek = new Date().getDay();
   const forecastDays = WEEK_DAYS.slice(dayInAWeek, WEEK_DAYS.length).concat(
     WEEK_DAYS.slice(0, dayInAWeek)
   );
+
+  const filteredData = data.list.filter(item => {
+    const [date, time] = item.dt_txt.split(" ");
+    return date !== currentDate && time === "12:00:00";
+  });
+
+  const lastDayDate = filteredData.length ? filteredData[filteredData.length - 1].dt_txt.split(" ")[0] : null;
+  if (lastDayDate) {
+    const lastDayItems = data.list.filter(item => item.dt_txt.startsWith(lastDayDate));
+    if (lastDayItems.every(item => !item.dt_txt.includes("12:00:00"))) {
+      filteredData.push(lastDayItems[lastDayItems.length - 1]);
+    }
+  }
 
   return (
     <motion.div
@@ -25,7 +39,7 @@ const Forecast = ({ data }) => {
       initial="hidden"
       animate="visible"
     >
-      {data.list.slice(0, 7).map((item, idx) => (
+      {filteredData.map((item, idx) => (
         <motion.div key={idx} className="card" variants={cardVariants}>
           <div className="daily-item">
             <img
