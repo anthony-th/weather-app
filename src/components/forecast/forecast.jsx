@@ -29,7 +29,7 @@ const Forecast = ({ data }) => {
         <motion.div key={idx} className="card" variants={cardVariants}>
           <div className="daily-item">
             <img
-              src={`icons/${item.weather[0].icon}.png`}
+              src={`icons/${item.weather[0].icon}.svg`}
               className="icon-small"
               alt="weather icon"
             />

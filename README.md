@@ -3,8 +3,8 @@
 ![Static Badge](https://img.shields.io/badge/JavaScript-323330?style=flat&logo=javascript&logoColor=F7DF1E) ![Static Badge](https://img.shields.io/badge/react-gray?logo=react) ![Static Badge](https://img.shields.io/badge/vite-white?logo=vite)  ![Static Badge](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 
 
-![screenshot](/public/readme/Screenshot_1.png "project preview")
-![screenshot](/public/readme/Screenshot_2.png "project preview")
+![screenshot](/public/readme/readme.png "project preview")
+<!-- ![screenshot](/public/readme/readme.gif "project preview") -->
 
 ## Project's Description
 
